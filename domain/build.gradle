@@ -1,0 +1,28 @@
+apply plugin: 'java-library'
+apply plugin: "org.jetbrains.kotlin.jvm"
+
+def globalConfiguration = rootProject.extensions.getByName("ext")
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation libs.kotlinSTDLib
+    implementation libs.rxJava
+}
+
+sourceCompatibility = globalConfiguration.sourceCompatibilityVersion
+targetCompatibility = globalConfiguration.targetCompatibilityVersion
+
+repositories {
+    mavenCentral()
+
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = globalConfiguration.jvmTargetVersion
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = globalConfiguration.jvmTargetVersion
+    }
+}
